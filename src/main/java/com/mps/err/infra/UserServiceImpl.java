@@ -17,11 +17,15 @@ public class UserServiceImpl{
     private UserRepository userRepo;
 
     public ResponseEntity<?> addUser(User user){
-        Optional<User> optionalUser = userRepo.findById(user.getId());  // IllegalArgumentException handler
-        if(optionalUser.isPresent())
-            return ResponseEntity.ok(userRepo.save(user));       
-        else
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        try {
+            Optional<User> optionalUser = userRepo.findById(user.getId()); 
+            if(!optionalUser.isPresent())
+                return ResponseEntity.ok(userRepo.save(user));       
+            else
+                return new ResponseEntity<>("the user already exists.", HttpStatus.CONFLICT);  // IllegalArgumentException handler
+        }catch(NullPointerException e){
+            return new ResponseEntity<>("login can't be null.", HttpStatus.BAD_REQUEST);
+        }
     }
 
 	public ResponseEntity<?> listAll() {
@@ -29,19 +33,19 @@ public class UserServiceImpl{
     }
     
     public ResponseEntity<?> listUser(String userName) {
-        Optional<User> optionalUser = userRepo.findByName(userName);    // NoSuchElementException handler
+        Optional<User> optionalUser = userRepo.findByLogin(userName); 
         if(optionalUser.isPresent())
             return ResponseEntity.ok(optionalUser.get());          
         else
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("User doesn't exist", HttpStatus.BAD_REQUEST);         // NoSuchElementException handler
     }
     
     public ResponseEntity<?> removeUser(String userName) {
-        Optional<User> optionalUser = userRepo.findByName(userName);    // IllegalArgumentException handler
+        Optional<User> optionalUser = userRepo.findByLogin(userName);                          // IllegalArgumentException handler
         if(optionalUser.isPresent()){
             userRepo.delete(optionalUser.get());
             return new ResponseEntity<>(HttpStatus.OK);
         }else
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("User doesn't exist", HttpStatus.BAD_REQUEST);
     }
 }
