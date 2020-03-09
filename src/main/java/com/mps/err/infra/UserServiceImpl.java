@@ -17,7 +17,11 @@ public class UserServiceImpl{
     private UserRepository userRepo;
 
     public ResponseEntity<?> addUser(User user){
-        return ResponseEntity.ok(userRepo.save(user));
+        Optional<User> optionalUser = userRepo.findById(user.getId());  // IllegalArgumentException handler
+        if(optionalUser.isPresent())
+            return ResponseEntity.ok(userRepo.save(user));       
+        else
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 	public ResponseEntity<?> listAll() {
@@ -25,15 +29,15 @@ public class UserServiceImpl{
     }
     
     public ResponseEntity<?> listUser(String userName) {
-        Optional<User> optionalUser = userRepo.findByName(userName);
+        Optional<User> optionalUser = userRepo.findByName(userName);    // NoSuchElementException handler
         if(optionalUser.isPresent())
-            return ResponseEntity.ok(optionalUser.get());
+            return ResponseEntity.ok(optionalUser.get());          
         else
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     
     public ResponseEntity<?> removeUser(String userName) {
-        Optional<User> optionalUser = userRepo.findByName(userName);
+        Optional<User> optionalUser = userRepo.findByName(userName);    // IllegalArgumentException handler
         if(optionalUser.isPresent()){
             userRepo.delete(optionalUser.get());
             return new ResponseEntity<>(HttpStatus.OK);
