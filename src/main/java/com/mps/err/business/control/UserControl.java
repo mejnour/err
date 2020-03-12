@@ -1,7 +1,7 @@
 package com.mps.err.business.control;
 
 import com.mps.err.business.model.User;
-import com.mps.err.infra.UserServiceImpl;
+import com.mps.err.infra.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,26 +20,26 @@ import lombok.NonNull;
 public class UserControl{
 
     @Autowired
-    private UserServiceImpl userImpl;
+    private UserService userService;
 
     @PostMapping("/")
     public ResponseEntity<?> addUser(@RequestBody @NonNull User user){
-        return userImpl.addUser(user);
+        return userService.addUser(user);
     }
 
     @GetMapping("/")
     public ResponseEntity<?> listAll(){
-        return userImpl.listAll();
+        return userService.listAll();
     }
 
     @GetMapping("/listUser")
     public ResponseEntity<?> listUser(@RequestParam("user") @NonNull String User){
-        return userImpl.listUser(User);
+        return userService.listUser(User);
     }
     
     @DeleteMapping("/")
     public ResponseEntity<?> deleteUser(@RequestParam("user") @NonNull String User){
-        return userImpl.removeUser(User);
+        return userService.removeUser(User);
     }
 
 }

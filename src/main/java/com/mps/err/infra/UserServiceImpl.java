@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserServiceImpl{
+public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepo;
@@ -32,7 +32,7 @@ public class UserServiceImpl{
 		return ResponseEntity.ok(userRepo.findAll());
     }
     
-    public ResponseEntity<?> listUser(String userName) {
+    public ResponseEntity<?> listUser(String userName) {  //Transformar em um strategy
         Optional<User> optionalUser = userRepo.findByLogin(userName); 
         if(optionalUser.isPresent())
             return ResponseEntity.ok(optionalUser.get());          
