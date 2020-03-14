@@ -27,18 +27,6 @@ public class UserServiceImpl implements UserService{
             return new ResponseEntity<>("login can't be null.", HttpStatus.BAD_REQUEST);
         }
     }
-
-	public ResponseEntity<?> listAll() {
-		return ResponseEntity.ok(userRepo.findAll());
-    }
-    
-    public ResponseEntity<?> listUser(String userName) {  //Transformar em um strategy
-        Optional<User> optionalUser = userRepo.findByLogin(userName); 
-        if(optionalUser.isPresent())
-            return ResponseEntity.ok(optionalUser.get());          
-        else
-            return new ResponseEntity<>("User doesn't exist", HttpStatus.BAD_REQUEST);         // NoSuchElementException handler
-    }
     
     public ResponseEntity<?> removeUser(String userName) {
         Optional<User> optionalUser = userRepo.findByLogin(userName);                          // IllegalArgumentException handler
