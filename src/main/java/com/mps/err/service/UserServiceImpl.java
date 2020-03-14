@@ -1,17 +1,17 @@
-package com.mps.err.infra;
+package com.mps.err.service;
 
 import java.util.Optional;
 
-import com.mps.err.business.control.UserRepository;
 import com.mps.err.business.model.User;
-
+import com.mps.err.infra.UserService;
+import com.mps.err.infra.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserServiceImpl{
+public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepo;
