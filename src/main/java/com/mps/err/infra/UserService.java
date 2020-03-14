@@ -8,5 +8,4 @@ public interface UserService {
     ResponseEntity<?> removeUser(String login);
     ResponseEntity<?> addUser(User user);
     
-
 }

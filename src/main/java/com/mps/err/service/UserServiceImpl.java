@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService{
 		return ResponseEntity.ok(userRepo.findAll());
     }
     
-    public ResponseEntity<?> listUser(String userName) {
+    public ResponseEntity<?> listUser(String userName) {  //Transformar em um strategy
         Optional<User> optionalUser = userRepo.findByLogin(userName); 
         if(optionalUser.isPresent())
             return ResponseEntity.ok(optionalUser.get());          

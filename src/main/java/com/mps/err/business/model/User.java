@@ -21,9 +21,8 @@ public class User {
 
     @NonNull
     @Size(min = 1, max = 20)
-    private String login;
+    private String nome;
 
-    @Size(min = 8, max = 12)
-    private String senha;   
+    private String tokenJwt;   
 
 }
