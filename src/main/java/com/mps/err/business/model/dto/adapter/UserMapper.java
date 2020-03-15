@@ -6,9 +6,9 @@ import com.mps.err.utils.KeyUtils;
 
 public class UserMapper {
 
-    public static UserDTO toPreservationDTO(UserHashedJwt user) {
+/*     public static UserDTO toPreservationDTO(UserHashedJwt user) {
         return new UserDTO();
-    }
+    } */
 
     public static UserHashedJwt toPreservation(UserDTO userDTO){
         return new UserHashedJwt()
