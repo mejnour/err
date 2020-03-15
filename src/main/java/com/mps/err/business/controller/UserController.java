@@ -21,6 +21,11 @@ import lombok.NonNull;
 @RequestMapping("/api/v1/err")
 public class UserController{
 
+    /**
+     * TODO: Criar um singleton
+     * TODO: Na camada business implemente, utilizando Template Method, a geração de mais um tipo de relatórios (por exemplo, PDF e HTML)  Os relatórios devem gerar estatísticas de acesso dos usuários no sistema. 
+     */
+
     @Autowired
     private UserService userService;
 
