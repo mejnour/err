@@ -53,4 +53,5 @@ public class UserServiceImpl implements UserService{
         }else
             return new ResponseEntity<>("User doesn't exist", HttpStatus.BAD_REQUEST);
     }
+
 }
